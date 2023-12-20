@@ -1,7 +1,7 @@
-package org.kohhannya
+package _practice
 
-import org.kohhannya.repository.CommentsRepository
-import org.kohhannya.repository.Impl.DefaultCommentsRepository
+import _practice.repository.CommentsRepository
+import _practice.repository.Impl.DefaultCommentsRepository
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module

@@ -1,7 +1,6 @@
-package org.kohhannya.api.model
+package _practice.api.model
 
 import kotlinx.serialization.Serializable
-import org.kohhannya.model.Comment
 
 @Serializable
 data class CreateCommentRequest(

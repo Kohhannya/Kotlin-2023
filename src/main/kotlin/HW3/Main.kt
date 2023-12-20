@@ -1,4 +1,4 @@
-package org.kohhannya
+package org.kohhannya.HW3
 
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
@@ -10,7 +10,8 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.json.Json
-import org.kohhannya.api.commentsApi
+import _practice.api.commentsApi
+import _practice.commentsModule
 import org.koin.ktor.plugin.Koin
 
 //TIP Press <shortcut raw="SHIFT"/> twice to open the Search Everywhere dialog and type <b>show whitespaces</b>,
@@ -40,7 +41,7 @@ fun Application.configureServer() {
     }
     install(Koin) {
 //        slf4jLogger()
-        modules(commentsModule)
+        modules(cardsModule)
     }
     install(ContentNegotiation) {
         json(Json {

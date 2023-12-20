@@ -1,6 +1,6 @@
-package org.kohhannya.repository
+package _practice.repository
 
-import org.kohhannya.model.Comment
+import _practice.model.Comment
 
 interface CommentsRepository {
 

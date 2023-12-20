@@ -1,7 +1,7 @@
-package org.kohhannya.repository.Impl
+package _practice.repository.Impl
 
-import org.kohhannya.model.Comment
-import org.kohhannya.repository.CommentsRepository
+import _practice.model.Comment
+import _practice.repository.CommentsRepository
 import java.time.Instant
 import kotlin.random.Random
 
