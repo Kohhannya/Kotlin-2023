@@ -35,3 +35,6 @@ tasks.test {
 kotlin {
     jvmToolchain(17)
 }
+application {
+    mainClass.set("MainKt")
+}

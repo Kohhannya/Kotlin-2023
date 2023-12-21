@@ -1,7 +1,5 @@
-package org.kohhannya.HW3
-
-import HW3.repository.CardsRepository
-import HW3.repository.Impl.DefaultCardsRepository
+import repository.CardsRepository
+import repository.Impl.DefaultCardsRepository
 
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind

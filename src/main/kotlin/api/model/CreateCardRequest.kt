@@ -1,4 +1,4 @@
-package HW3.api.model
+package api.model
 
 import kotlinx.serialization.Serializable
 
