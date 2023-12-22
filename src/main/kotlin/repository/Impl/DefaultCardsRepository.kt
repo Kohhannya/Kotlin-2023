@@ -1,5 +1,6 @@
 package repository.Impl
 
+import model.Author
 import model.Card
 import repository.CardsRepository
 import java.time.Instant
@@ -12,7 +13,7 @@ class DefaultCardsRepository : CardsRepository {
     private val cards: MutableSet<Card> = mutableSetOf()
 
     override fun getAll(): Collection<Card> {
-        return cards.toList() ?: emptyList<Card>()
+        return cards.toList()
     }
 
     override fun getById(id: Long): Card? {
@@ -27,13 +28,14 @@ class DefaultCardsRepository : CardsRepository {
         return cards.toList().subList(first, min(cards.size, first + perPage))
     }
 
-    override fun createCard(cardText: String): Card {
+    override fun createCard(cardText: String, author: Author): Card {
         val time: String = Instant.now().toString()
         val createdCard = Card(
             id = Random.nextLong(),
             text = cardText,
             createdAt = time,
-            changedAt = time
+            changedAt = time,
+            author = author
         )
         cards.add(createdCard)
         return createdCard

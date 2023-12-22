@@ -1,5 +1,6 @@
 package repository
 
+import model.Author
 import model.Card
 
 
@@ -15,7 +16,7 @@ interface CardsRepository {
     fun getByPage(perPage: Int, num: Int): Collection<Card>
 
     //Создание публикации с текстом cardText
-    fun createCard(cardText: String): Card
+    fun createCard(cardText: String, author: Author): Card
 
     //Изменение текста публикации по id на newCardText
     fun changeCard(id: Long, newCardText: String): Card?
