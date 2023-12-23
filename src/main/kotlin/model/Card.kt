@@ -9,7 +9,7 @@ data class Card(
     private var text: String,
     private val createdAt: String,
     private var changedAt: String,
-    private val author: Author
+    private val authorLogin: String
 ) {
     fun getId(): Long {
         return this.id
@@ -36,7 +36,7 @@ data class Card(
         this.changedAt = changingTime
     }
 
-    fun getAuthor(): Author {
-        return this.author
+    fun getAuthorLogin(): String {
+        return this.authorLogin
     }
 }

@@ -35,7 +35,7 @@ class DefaultCardsRepository : CardsRepository {
             text = cardText,
             createdAt = time,
             changedAt = time,
-            author = author
+            authorLogin = author.getLogin()
         )
         cards.add(createdCard)
         return createdCard

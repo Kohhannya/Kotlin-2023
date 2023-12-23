@@ -22,7 +22,7 @@ fun Application.cardsApi() {
     }
 
     fun authorCheck(card: Card, login: String): Boolean {
-        return card.getAuthor().getLogin() == login
+        return card.getAuthorLogin() == login
     }
     ///
 
