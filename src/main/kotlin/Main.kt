@@ -15,6 +15,7 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.json.Json
+import org.jetbrains.exposed.sql.Database
 import org.koin.ktor.plugin.Koin
 
 //TIP Press <shortcut raw="SHIFT"/> twice to open the Search Everywhere dialog and type <b>show whitespaces</b>,
@@ -30,10 +31,21 @@ fun main() {
             }
         }
         configureServer()
+//        configureDatabase()
         cardsApi()
         authApi()
     }.start(wait = true)
 
+}
+
+fun Application.configureDatabase() {
+    val config = ConfigFactory.load("application.conf")
+    val url = config.getString("database.url")
+    val username = config.getString("database.username")
+    val password = config.getString("database.password")
+    val database = Database.connect(url = url, user = username, password = password)
+
+    
 }
 
 fun Application.configureServer() {
