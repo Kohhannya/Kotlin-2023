@@ -26,10 +26,13 @@ fun Application.authApi() {
             val added: Boolean = usersRepository.addUser(
                 request.login,
                 request.password,
-                request.name)
+                request.name
+            )
             if (added) call.respond(HttpStatusCode.OK)
-            else call.respond(HttpStatusCode.Conflict,
-                "User with login '${request.login}' has already registered")
+            else call.respond(
+                HttpStatusCode.Conflict,
+                "User with login '${request.login}' has already registered"
+            )
         }
 
         post("/login") {
@@ -39,15 +42,19 @@ fun Application.authApi() {
             val user = usersRepository.getByLogin(request.login)
             // Check username and password
             // ...
-            if (user != null && user.getPassword() == request.password) {
-                val token = tokensRepository.createToken(user.getLogin(), user.getName())
+            println(user)
+            if (user == null) call.respond(HttpStatusCode.NotFound, "No such login")
+            else {
+                if (user.getLogin() == request.login && user.getPassword() == request.password) {
+                    val token = tokensRepository.createToken(user.getLogin(), user.getName())
 
-                println("Получение токена доступа")
-                //Возвращаем JWT токен
-                call.response.header(HttpHeaders.Authorization, token.accessToken)
-                call.respond(hashMapOf("token" to token.accessToken))
-            } else
-                call.respond(HttpStatusCode.Unauthorized, "Invalid credentials")
+                    println("Получение токена доступа")
+                    //Возвращаем JWT токен
+                    call.response.header(HttpHeaders.Authorization, token.accessToken)
+                    call.respond(hashMapOf("token" to token.accessToken))
+                } else
+                    call.respond(HttpStatusCode.Unauthorized, "Invalid credentials")
+            }
         }
 
         authenticate("auth-jwt") {

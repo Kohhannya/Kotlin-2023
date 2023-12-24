@@ -14,18 +14,19 @@ class DBUsersRepository : UsersRepository {
 
     private fun UserEntity.toUser(): User {
         return User(
-            login = login,
-            password = password,
-            name = name,
-            createdAt = createdAt.toString()
+            login = this.login,
+            password = this.password,
+            name = this.name,
+            createdAt = this.createdAt.toString()
         )
     }
 
     override fun addUser(login: String, password: String, name: String): Boolean {
         return transaction {
             val userId: Long = Random.nextLong()
-            val oldUser = UserEntity.find { UsersTable.login eq login }
-            if (oldUser.empty()) false
+            val num = UserEntity.find { UsersTable.login eq login }.count()
+            println(num)
+            if (num > 0) false
             else {
                 UserEntity.new(userId) {
                     this.login = login
@@ -41,7 +42,8 @@ class DBUsersRepository : UsersRepository {
     override fun getByLogin(login: String): User? {
         return transaction {
             val user = UserEntity.find { UsersTable.login eq login }
-            if (user.empty()) null
+            println(user + " " + user.count())
+            if (user.count() > 1) null
             else user.first().toUser()
         }
     }
