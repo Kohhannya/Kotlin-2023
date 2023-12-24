@@ -12,5 +12,5 @@ object CardsTable : LongIdTable("cards") {
     val createdAt: Column<Instant> = timestamp("createdAt").clientDefault { Clock.System.now() }
     val changedAt: Column<Instant> = timestamp("changedAt").clientDefault { Clock.System.now() }
 
-    val authorLogin: Column<String> = reference("login", AuthorsTable.login)
+    val authorLogin: Column<String> = varchar("authorLogin", length = 20)
 }

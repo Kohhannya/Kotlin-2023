@@ -10,8 +10,8 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val usersModule = module {
-//    singleOf(::DBUsersRepository) bind UsersRepository::class
-    singleOf(::DefaultUsersRepository) bind UsersRepository::class
+    singleOf(::DBUsersRepository) bind UsersRepository::class
+//    singleOf(::DefaultUsersRepository) bind UsersRepository::class
 
     singleOf(::DefaultTokensRepository) bind TokensRepository::class
 }

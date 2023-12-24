@@ -39,6 +39,10 @@ class DBUsersRepository : UsersRepository {
     }
 
     override fun getByLogin(login: String): User? {
-        TODO("Not yet implemented")
+        return transaction {
+            val user = UserEntity.find { UsersTable.login eq login }
+            if (user.empty()) null
+            else user.first().toUser()
+        }
     }
 }

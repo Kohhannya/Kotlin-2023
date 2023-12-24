@@ -7,6 +7,6 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val cardsModule = module {
-    singleOf(::DefaultCardsRepository) bind CardsRepository::class
-//    singleOf(::DBCardsRepository) bind CardsRepository::class
+//    singleOf(::DefaultCardsRepository) bind CardsRepository::class
+    singleOf(::DBCardsRepository) bind CardsRepository::class
 }

@@ -16,6 +16,7 @@ dependencies {
     val koinVersion = "3.5.0"
     val logBackVersion = "1.4.11"
     val exposedVersion = "0.45.0"
+    val pgDriverVersion = "42.6.0"
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 
@@ -44,6 +45,8 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-kotlin-datetime:$exposedVersion")
+
+    implementation("org.postgresql:postgresql:${pgDriverVersion}")
 }
 
 tasks.test {

@@ -1,4 +1,6 @@
 import api.authApi
+
+import api.authApi
 import api.cardsApi
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
@@ -16,7 +18,11 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.transactions.transaction
 import org.koin.ktor.plugin.Koin
+import repository.model.CardsTable
+import repository.model.UsersTable
 
 //TIP Press <shortcut raw="SHIFT"/> twice to open the Search Everywhere dialog and type <b>show whitespaces</b>,
 // then press <shortcut raw="ENTER"/>. You can now see whitespace characters in your code.
@@ -31,21 +37,26 @@ fun main() {
             }
         }
         configureServer()
-//        configureDatabase()
+        configureDatabase()
         cardsApi()
         authApi()
     }.start(wait = true)
 
 }
-
 fun Application.configureDatabase() {
     val config = ConfigFactory.load("application.conf")
-    val url = config.getString("database.url")
-    val username = config.getString("database.username")
-    val password = config.getString("database.password")
-    val database = Database.connect(url = url, user = username, password = password)
+    val url = "jdbc:postgresql://localhost:9000/postgres"
+    val username = "mipt_kotlin_backend"
+    val password = "simple_password"
+    val db = Database.connect(url = url, user = username, password = password)
+    db.initSchema()
+}
 
-    
+private fun Database.initSchema() {
+    transaction(this) {
+        SchemaUtils.create(UsersTable)
+        SchemaUtils.create(CardsTable)
+    }
 }
 
 fun Application.configureServer() {
